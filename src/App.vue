@@ -1,15 +1,17 @@
 <template>
   <div id="app">
+    <p>Calculation = covid cases / total population * 100</p>
+    <p>Source: <a href="https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.json">Our World in Data</a></p>
     <p>Select population</p>
     <vue-range-slider ref="slider" v-model="population" :min="0" :max="30 * 1000 * 1000"></vue-range-slider>
-    <template v-if="continentExtremes">
+    <div class="continent-wrapper" v-if="continentExtremes">
       <div class="continents" v-for="continent in Object.keys(continentExtremes)" :key="continent">
         <h3>{{ continent }}</h3>
-        <p>Best: {{ continentExtremes[continent].best.country }} - {{ continentExtremes[continent].best.casePercent }}</p>
-        <p>Worst: {{ continentExtremes[continent].worst.country }} - {{ continentExtremes[continent].worst.casePercent }}</p>
-        <p>{{ data.filter(x => x.population > population && x.continent === continent).length }} / {{ data.filter(x => x.continent === continent).length }} selected</p>
+        <p>Best: {{ continentExtremes[continent].best.country }}: <strong>{{ continentExtremes[continent].best.casePercent }}</strong></p>
+        <p>Worst: {{ continentExtremes[continent].worst.country }}: <strong>{{ continentExtremes[continent].worst.casePercent }}</strong></p>
+        <p>{{ data.filter(x => x.population > population && x.continent === continent).length }} / {{ data.filter(x => x.continent === continent).length }} countries with population > {{ population }}</p>
       </div>
-    </template>
+    </div>
   </div>
 </template>
 
@@ -92,5 +94,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   margin-top: 60px;
+  margin-left: 60px;
+  margin-right: 60px;
+}
+.continent-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 800px;
 }
 </style>
