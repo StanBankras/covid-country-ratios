@@ -31,6 +31,7 @@
         </div>
       </div>
     </div>
+    <div v-else>Loading data...</div>
   </div>
 </template>
 
