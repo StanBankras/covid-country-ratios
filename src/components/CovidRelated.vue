@@ -56,7 +56,7 @@ export default {
   },
   data() {
     return {
-      csvFolder: 'http://localhost:8080/csv/',
+      csvFolder: './csv/',
       countryInput: 'Iceland',
       paths: [
         {
