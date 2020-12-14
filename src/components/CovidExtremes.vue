@@ -12,6 +12,13 @@
         <p>{{ data.filter(x => x.population > population && x.continent === continent).length }} / {{ data.filter(x => x.continent === continent).length }} countries with population > {{ population }}</p>
       </div>
     </div>
+    <h2 style="margin-top: 4rem;">Data per country</h2>
+    <div class="countries">
+      <div class="country" v-for="country in data" :key="country.country">
+        <p class="name">{{ country.country }}</p>
+        <p class="ratio">{{ country.caseRatio }}%</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -86,3 +93,14 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.countries {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+}
+.country .name {
+  font-weight: bold;
+}
+</style>
